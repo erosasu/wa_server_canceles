@@ -16,7 +16,6 @@
 
 import { create, defaultLogger } from '@wppconnect-team/wppconnect';
 import cors from 'cors';
-import puppeteer from 'puppeteer';
 import express, { Express, NextFunction, Router } from 'express';
 import boolParser from 'express-query-boolean';
 import { createServer } from 'http';
@@ -37,6 +36,7 @@ import {
   startAllSessions,
 } from './util/functions';
 import { createLogger } from './util/logger';
+
 (async () => {
   try {
     const client = await create({
@@ -44,9 +44,6 @@ import { createLogger } from './util/logger';
       catchLinkCode: (str) => console.log('Code: ' + str),
     });
 
-    const browser = await puppeteer.launch({
-      ignoreDefaultArgs: ['--disable-extensions'],
-    });
     await start(client);
   } catch (error) {
     console.log(error);

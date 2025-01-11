@@ -88,8 +88,7 @@ export default {
     mongodbPassword: '',
     mongodbHost: '',
     mongoIsRemote: true,
-    mongoURLRemote:
-      'mongodb+srv://ernierous:cuantum47@cluster0.3m7828i.mongodb.net/clientes_conversaciones?retryWrites=true&w=majority',
+    mongoURLRemote: process.env.MONGO_URL,
     mongodbPort: 27017,
     redisHost: 'localhost',
     redisPort: 6379,
@@ -99,8 +98,8 @@ export default {
   },
   aws_s3: {
     region: 'us-east-1' as any,
-    access_key_id: 'AKIAXOQPDYH7KCIJYQXP',
-    secret_key: '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',
+    access_key_id: process.env.AMAZON_ACCESKEYID,
+    secret_key: process.env.AMAZON_SECRETACCESKEY,
     defaultBucketName: 'cdjwhatsapchats',
     endpoint: 'https://cdjwhatsapchats.s3.us-east-1.amazonaws.com',
     forcePathStyle: true,

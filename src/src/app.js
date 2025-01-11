@@ -6,7 +6,7 @@ import { generatePrompt } from './prompt.js';
 import { tools } from './tools.js';
 
 const openai = new OpenAI({
-  apiKey: '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',
+  apiKey: process.env.OPENAI_API,
 });
 const model = 'gpt-4o-mini';
 
