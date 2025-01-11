@@ -96,7 +96,7 @@ export async function sendMessage(req: Request, res: Response) {
     for (const contato of phone) {
       results.push(await req.client.sendText(contato, message, options));
     }
-
+    console.log(message);
     if (results.length === 0)
       return res.status(400).json('Error sending message');
     req.io.emit('mensagem-enviada', results);

@@ -13,7 +13,7 @@ export default {
   webhook: {
     url: null,
     autoDownload: true,
-    uploadS3: false,
+    uploadS3: true,
     readMessage: true,
     allUnreadOnStart: false,
     listenAcks: true,
@@ -23,19 +23,19 @@ export default {
     onPollResponse: true,
     onRevokedMessage: true,
     onLabelUpdated: true,
-    onSelfMessage: false,
+    onSelfMessage: true,
     ignore: ['status@broadcast'],
   },
   websocket: {
-    autoDownload: false,
-    uploadS3: false,
+    autoDownload: true,
+    uploadS3: true,
   },
   chatwoot: {
     sendQrCode: true,
     sendStatus: true,
   },
   archive: {
-    enable: false,
+    enable: true,
     waitTime: 10,
     daysToArchive: 45,
   },
@@ -78,7 +78,7 @@ export default {
     linkPreviewApiServers: null,
   },
   mapper: {
-    enable: false,
+    enable: true,
     prefix: 'tagone-',
   },
   db: {
@@ -88,7 +88,8 @@ export default {
     mongodbPassword: '',
     mongodbHost: '',
     mongoIsRemote: true,
-    mongoURLRemote: '',
+    mongoURLRemote:
+      'mongodb+srv://ernierous:cuantum47@cluster0.3m7828i.mongodb.net/clientes_conversaciones?retryWrites=true&w=majority',
     mongodbPort: 27017,
     redisHost: 'localhost',
     redisPort: 6379,
@@ -97,11 +98,11 @@ export default {
     redisPrefix: 'docker',
   },
   aws_s3: {
-    region: 'sa-east-1' as any,
-    access_key_id: null,
-    secret_key: null,
-    defaultBucketName: null,
-    endpoint: null,
-    forcePathStyle: null,
+    region: 'us-east-1' as any,
+    access_key_id: 'AKIAXOQPDYH7KCIJYQXP',
+    secret_key: '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',
+    defaultBucketName: 'cdjwhatsapchats',
+    endpoint: 'https://cdjwhatsapchats.s3.us-east-1.amazonaws.com',
+    forcePathStyle: true,
   },
 } as unknown as ServerOptions;

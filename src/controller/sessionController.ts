@@ -36,8 +36,9 @@ async function downloadFileFunction(
 ) {
   try {
     const buffer = await client.decryptFile(message);
-
+    console.log(message.body);
     const filename = `./WhatsAppImages/file${message.t}`;
+    console.log(filename);
     if (!fs.existsSync(filename)) {
       let result = '';
       if (message.type === 'ptt') {
@@ -381,7 +382,7 @@ export async function downloadMediaByMessage(req: Request, res: Response) {
     } else {
       message = messageId;
     }
-
+    console.log(message);
     if (!message)
       return res.status(400).json({
         status: 'error',

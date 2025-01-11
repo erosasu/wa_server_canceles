@@ -5,6 +5,7 @@ export default {
   content: {
     path: '$item',
     formatting: (value: any) => {
+      console.log(value);
       return value.mimetype ? value.caption || '' : value.body;
     },
   },

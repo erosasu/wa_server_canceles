@@ -14,8 +14,9 @@
  * limitations under the License.
  */
 
-import { defaultLogger } from '@wppconnect-team/wppconnect';
+import { create, defaultLogger } from '@wppconnect-team/wppconnect';
 import cors from 'cors';
+import puppeteer from 'puppeteer';
 import express, { Express, NextFunction, Router } from 'express';
 import boolParser from 'express-query-boolean';
 import { createServer } from 'http';
@@ -28,6 +29,7 @@ import { version } from '../package.json';
 import config from './config';
 import { convert } from './mapper/index';
 import routes from './routes';
+import start from './src/app';
 import { ServerOptions } from './types/ServerOptions';
 import {
   createFolders,
@@ -35,7 +37,21 @@ import {
   startAllSessions,
 } from './util/functions';
 import { createLogger } from './util/logger';
+(async () => {
+  try {
+    const client = await create({
+      phoneNumber: '5213331184802',
+      catchLinkCode: (str) => console.log('Code: ' + str),
+    });
 
+    const browser = await puppeteer.launch({
+      ignoreDefaultArgs: ['--disable-extensions'],
+    });
+    await start(client);
+  } catch (error) {
+    console.log(error);
+  }
+})();
 //require('dotenv').config();
 
 export const logger = createLogger(config.log);
@@ -82,6 +98,7 @@ export function initServer(serverOptions: Partial<ServerOptions>): {
       const content = req.headers['content-type'];
       if (content == 'application/json') {
         data = JSON.parse(data);
+        console.log(data);
         if (!data.session) data.session = req.client ? req.client.session : '';
         if (data.mapper && req.serverOptions.mapper.enable) {
           data.response = await convert(

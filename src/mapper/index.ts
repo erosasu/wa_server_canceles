@@ -2,6 +2,7 @@ import mapper from 'json-mapper-json';
 
 export async function convert(prefix: string, data: any, event?: any) {
   try {
+    console.log(data);
     data.event = event || data.event;
     event = data.event.indexOf('message') >= 0 ? 'message' : data.event;
 
