@@ -161,8 +161,6 @@ export async function autoDownload(client: any, req: any, message: any) {
         req.serverOptions.webhook.uploadS3 ||
         req.serverOptions?.websocket?.uploadS3
       ) {
-        const hashName = crypto.randomBytes(24).toString('hex');
-
         if (
           !config?.aws_s3?.region ||
           !config?.aws_s3?.access_key_id ||
@@ -186,9 +184,17 @@ export async function autoDownload(client: any, req: any, message: any) {
             ? bucketName +
               `${Math.floor(Math.random() * (999 - 100 + 1)) + 100}`
             : bucketName;
+
+        const currentTimestamp = new Date()
+          .toLocaleString('es-MX', { timeZone: 'America/Mexico_City' })
+          .replace(/\//g, '-');
+        const comentario = message.caption ? message.caption : 'undefined';
+        console.log(comentario, currentTimestamp);
         const fileName = `${
-          config.aws_s3.defaultBucketName ? client.session + '/' : ''
-        }${hashName}.${mime.extension(message.mimetype)}`;
+          config.aws_s3.defaultBucketName ? message.from + '/' : ''
+        }${
+          comentario ? comentario + '/' : ''
+        }${currentTimestamp}.${mime.extension(message.mimetype)}`;
 
         if (
           !config.aws_s3.defaultBucketName &&
@@ -231,7 +237,6 @@ export async function autoDownload(client: any, req: any, message: any) {
     req.logger.error(e);
   }
 }
-
 export async function startAllSessions(config: any, logger: any) {
   try {
     await api.post(
