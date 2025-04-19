@@ -68,7 +68,6 @@ export function initServer(serverOptions: Partial<ServerOptions>): {
     : 'silly';
 
   setMaxListners(serverOptions as ServerOptions);
-
   const app = express();
   const PORT = process.env.PORT || serverOptions.port;
 
@@ -155,3 +154,4 @@ please set the log to 'silly', copy the log that shows the error and open your i
     logger,
   };
 }
+
